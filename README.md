@@ -2,7 +2,14 @@
 
 **Zie wanneer je programmeert met Claude Code: elke prompt tot op de seconde, je actieve tijd en je patronen per dag, week, maand en kwartaal.**
 
-> *"Vandaag, maandag 2 november 2026: je hebt 28 prompts gegeven."*
+> *"Vandaag, maandag 2 november 2026: je hebt 30 prompts gegeven."*
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/dashboard-dark.png">
+  <img alt="Claude Code Logger dashboard met tijdlijn, prompts per uur en kwartaaloverzicht (demodata)" src="docs/dashboard-light.png">
+</picture>
+
+<sub>Screenshot met verzonnen demodata.</sub>
 
 Claude Code Logger is een klein lokaal dashboard voor Windows. Het leest de gesprekken die Claude Code al op je pc bewaart (`%USERPROFILE%\.claude\projects`) en laat zien wanneer je actief was. Er gaat niets naar het internet: alle data blijft op je eigen pc.
 
@@ -33,6 +40,10 @@ Wil je een snelkoppeling op je bureaublad? Klik met de rechtermuisknop op `launc
 ```json
 { "cleanupPeriodDays": 365 }
 ```
+
+## Demomodus
+
+Wil je de app laten zien zonder je eigen prompts te tonen? Open dan <http://localhost:4317/?demo>. Je ziet dan 120 dagen verzonnen maar realistische data, met een **DEMO**-label in beeld. Met `?demo&range=90` opent het overzicht meteen op kwartaal. Je echte data en je archief worden in demomodus niet gelezen of aangepast.
 
 ## Hoe het werkt
 

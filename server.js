@@ -133,7 +133,8 @@ function collect() {
 const server = http.createServer((req, res) => {
   if (req.url.startsWith("/api/data")) {
     try {
-      const body = JSON.stringify(collect());
+      const demo = /[?&]demo\b/.test(req.url);
+      const body = JSON.stringify(demo ? require("./demo").demoData() : collect());
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(body);
     } catch (e) {
