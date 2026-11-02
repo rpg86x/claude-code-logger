@@ -61,4 +61,4 @@ Claude Code Logger is free. Find it useful? A small donation helps fund new vers
 
 ---
 
-© 2026 rpg86x. All rights reserved. Claude Code Logger is an independent project and is not affiliated with Anthropic.
+Open source under the [MIT License](LICENSE) · © 2026 rpg86x. Claude Code Logger is an independent project and is not affiliated with Anthropic.
