@@ -134,13 +134,19 @@ const server = http.createServer((req, res) => {
   if (req.url.startsWith("/api/data")) {
     try {
       const demo = /[?&]demo\b/.test(req.url);
-      const body = JSON.stringify(demo ? require("./demo").demoData() : collect());
+      const lang = (req.url.match(/[?&]lang=([a-z]{2})/) || [])[1];
+      const body = JSON.stringify(demo ? require("./demo").demoData(120, lang) : collect());
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(body);
     } catch (e) {
       res.writeHead(500, { "Content-Type": "text/plain" });
       res.end(String(e));
     }
+    return;
+  }
+  if (req.url === "/i18n.js") {
+    res.writeHead(200, { "Content-Type": "text/javascript; charset=utf-8" });
+    fs.createReadStream(path.join(__dirname, "i18n.js")).pipe(res);
     return;
   }
   if (req.url === "/" || req.url.startsWith("/?")) {

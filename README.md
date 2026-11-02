@@ -1,62 +1,64 @@
 # Claude Code Logger
 
-**Zie wanneer je programmeert met Claude Code: elke prompt tot op de seconde, je actieve tijd en je patronen per dag, week, maand en kwartaal.**
+🇬🇧 **English** · 🇳🇱 [Nederlands](README.nl.md)
 
-> *"Vandaag, maandag 2 november 2026: je hebt 30 prompts gegeven."*
+**See when you code with Claude Code: every prompt to the second, your active time, and your patterns per day, week, month and quarter.**
+
+> *"Today, Monday, 2 November 2026: you sent 32 prompts."*
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/dashboard-dark.png">
-  <img alt="Claude Code Logger dashboard met tijdlijn, prompts per uur en kwartaaloverzicht (demodata)" src="docs/dashboard-light.png">
+  <img alt="Claude Code Logger dashboard with timeline, prompts per hour and quarterly overview (demo data)" src="docs/dashboard-light.png">
 </picture>
 
-<sub>Screenshot met verzonnen demodata.</sub>
+<sub>Screenshot with made-up demo data.</sub>
 
-Claude Code Logger is een klein lokaal dashboard voor Windows. Het leest de gesprekken die Claude Code al op je pc bewaart (`%USERPROFILE%\.claude\projects`) en laat zien wanneer je actief was. Er gaat niets naar het internet: alle data blijft op je eigen pc.
+Claude Code Logger is a small local dashboard for Windows. It reads the transcripts Claude Code already keeps on your machine (`%USERPROFILE%\.claude\projects`) and shows when you were active. Nothing goes to the internet: all data stays on your own computer.
 
-*English: a local, privacy-first dashboard that shows when you work with Claude Code — every prompt to the second, active coding time, a daily timeline and week/month/quarter overviews. Reads Claude Code's own transcripts; nothing leaves your machine.*
+## What you get
 
-## Wat je ziet
+- **Prompts per day**, with the exact time of every prompt and the session it belongs to
+- **Active coding time**: your total active time, plus your first and last activity of the day
+- **24-hour timeline** with your active blocks and a tick for every prompt
+- **Prompts per hour**, so you can see when you do the most
+- **Week, month or quarter overview** with total prompts, active time and active days
+- **Its own archive**: Claude Code deletes old transcripts after a while, but the logger keeps everything it has ever seen
+- **Language switcher**: Dutch and English, plus an optional third language of your choice (Deutsch, Français or Español)
+- Refreshes every 15 seconds, with light and dark themes
 
-- **Prompts per dag**, met de exacte tijd van elke prompt en in welke sessie je hem gaf
-- **Actief geprogrammeerd**: je totale actieve tijd, plus je eerste en laatste activiteit van de dag
-- **Tijdlijn van 24 uur** met je actieve periodes en een streepje per prompt
-- **Prompts per uur**, zodat je ziet wanneer je het meest doet
-- **Overzicht per week, maand of kwartaal**, met je totale prompts, actieve tijd en actieve dagen
-- **Eigen archief**: Claude Code wist oude gesprekken na verloop van tijd, maar de logger bewaart alles wat hij ooit heeft gezien
-- Ververst automatisch elke 15 seconden en heeft een licht en donker thema
+## Install
 
-## Installeren
+All you need is [Node.js](https://nodejs.org) 18 or newer. There are no packages to install.
 
-Je hebt alleen [Node.js](https://nodejs.org) nodig, versie 18 of nieuwer. Er zijn geen extra pakketten nodig.
+1. Download this repository via **Code → Download ZIP** and unzip it.
+2. Double-click `launch.vbs` to start the app without a console window. If you want to see the console, use `start.bat` instead.
+3. The dashboard opens at <http://localhost:4317>.
 
-1. Download deze repository via **Code → Download ZIP** en pak hem uit.
-2. Dubbelklik op `launch.vbs` om de app te starten zonder consolevenster. Wil je het consolevenster wel zien, gebruik dan `start.bat`.
-3. Het dashboard opent op <http://localhost:4317>.
+Want a desktop shortcut? Right-click `launch.vbs`, choose **Create shortcut**, and use `claude-code-logger.ico` as the icon.
 
-Wil je een snelkoppeling op je bureaublad? Klik met de rechtermuisknop op `launch.vbs` en kies **Snelkoppeling maken**. `claude-code-logger.ico` kun je als icoon gebruiken.
-
-**Tip:** Claude Code bewaart gesprekken standaard 30 dagen. Wil je de logger ook oudere geschiedenis laten zien? Zet dan in `%USERPROFILE%\.claude\settings.json`:
+**Tip:** Claude Code keeps transcripts for 30 days by default. To let the logger see more history, add this to `%USERPROFILE%\.claude\settings.json`:
 
 ```json
 { "cleanupPeriodDays": 365 }
 ```
 
-## Demomodus
+## Demo mode
 
-Wil je de app laten zien zonder je eigen prompts te tonen? Open dan <http://localhost:4317/?demo>. Je ziet dan 120 dagen verzonnen maar realistische data, met een **DEMO**-label in beeld. Met `?demo&range=90` opent het overzicht meteen op kwartaal. Je echte data en je archief worden in demomodus niet gelezen of aangepast.
+Want to show the app without revealing your own prompts? Open <http://localhost:4317/?demo>. You'll see 120 days of made-up but realistic data, with a **DEMO** label on screen. Add `&range=90` to open the quarter view, and `&lang=en` (or `nl`, `de`, `fr`, `es`) to pick the language. Demo data is available in all five languages. Demo mode never reads or changes your real data or archive.
 
-## Hoe het werkt
+## How it works
 
-- `server.js` is een kleine Node-server die alleen bereikbaar is op `127.0.0.1`. Hij leest de `.jsonl`-gesprekken van Claude Code en telt alleen berichten die je zelf hebt getypt. Systeemmeldingen, toolresultaten en commando's tellen niet mee. Prompts uit geforkte sessies tellen maar één keer.
-- De **actieve tijd** bestaat uit alle momenten waarop jij of Claude iets deed. Een pauze van meer dan 10 minuten begint een nieuwe periode.
-- Het **archief** staat in de map `data` naast de app-map, in `../data/archive.json`. Daarin staan ook de teksten van je prompts. Deel die map dus niet.
+- `server.js` is a small Node server that only listens on `127.0.0.1`. It reads Claude Code's `.jsonl` transcripts and only counts messages you typed yourself. System messages, tool results and commands are skipped, and prompts from forked sessions are counted once.
+- **Active time** is built from every moment you or Claude did something. A gap of more than 10 minutes starts a new block.
+- The **archive** lives in a `data` folder next to the app folder (`../data/archive.json`). It contains the text of your prompts, so don't share that folder.
+- Translations live in `i18n.js`. Adding a language means adding one block there.
 
-## Steun de Logger
+## Support the Logger
 
-Claude Code Logger is gratis. Vind je hem handig? Met een kleine donatie help je mee aan nieuwe versies met meer grafieken en patronen.
+Claude Code Logger is free. Find it useful? A small donation helps fund new versions with more charts and patterns.
 
-☕ **[Trakteer op een koffie](https://urbantechmonk.gumroad.com/coffee)**
+☕ **[Buy me a coffee](https://urbantechmonk.gumroad.com/coffee)**
 
 ---
 
-© 2026 rpg86x. Alle rechten voorbehouden. Claude Code Logger is een onafhankelijk project en is niet verbonden aan Anthropic.
+© 2026 rpg86x. All rights reserved. Claude Code Logger is an independent project and is not affiliated with Anthropic.

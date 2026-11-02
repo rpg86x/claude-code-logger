@@ -23,6 +23,9 @@
   .demobadge { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .08em; vertical-align: 4px;
     margin-left: 10px; padding: 2px 7px; border-radius: 5px; background: var(--active); color: var(--bg); }
   .demobadge[hidden] { display: none; }
+  .langs button { padding: 4px 9px; font-size: 12px; font-weight: 600; }
+  .extra { font: inherit; font-size: 12px; background: var(--card); color: var(--muted); border: 1px solid var(--line);
+    border-radius: 8px; padding: 4px 6px; cursor: pointer; }
   .hright { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .donate { font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap;
     border: 1px solid var(--accent); border-radius: 999px; padding: 5px 12px; }
@@ -86,45 +89,47 @@
   <header>
     <h1>Claude Code <span>Logger</span><em class="demobadge" id="demobadge" hidden>DEMO</em></h1>
     <div class="hright">
-      <div class="status" id="status">Laden…</div>
-      <a class="donate" data-donate target="_blank" rel="noopener" hidden>♥ Steun de Logger</a>
+      <div class="status" id="status" data-i18n="loading">Laden…</div>
+      <div class="seg3 langs" id="langs"></div>
+      <select class="extra" id="extra"></select>
+      <a class="donate" data-donate data-i18n="donateTop" target="_blank" rel="noopener" hidden>♥ Steun de Logger</a>
     </div>
   </header>
 
   <div class="daynav">
-    <button id="prev" title="Vorige dag">←</button>
+    <button id="prev" data-i18n-title="prev">←</button>
     <input type="date" id="date">
-    <button id="next" title="Volgende dag">→</button>
-    <button id="today">Vandaag</button>
+    <button id="next" data-i18n-title="next">→</button>
+    <button id="today" data-i18n="today">Vandaag</button>
   </div>
 
   <div class="headline" id="headline"></div>
 
   <div class="tiles">
-    <div class="tile"><div class="k">Prompts</div><div class="v" id="tPrompts">–</div></div>
-    <div class="tile"><div class="k">Actief geprogrammeerd</div><div class="v" id="tActive">–</div></div>
-    <div class="tile"><div class="k">Eerste activiteit</div><div class="v" id="tFirst">–</div></div>
-    <div class="tile"><div class="k">Laatste activiteit</div><div class="v" id="tLast">–</div></div>
-    <div class="tile"><div class="k">Sessies</div><div class="v" id="tSessions">–</div></div>
+    <div class="tile"><div class="k" data-i18n="kPrompts">Prompts</div><div class="v" id="tPrompts">–</div></div>
+    <div class="tile"><div class="k" data-i18n="kActive">Actief geprogrammeerd</div><div class="v" id="tActive">–</div></div>
+    <div class="tile"><div class="k" data-i18n="kFirst">Eerste activiteit</div><div class="v" id="tFirst">–</div></div>
+    <div class="tile"><div class="k" data-i18n="kLast">Laatste activiteit</div><div class="v" id="tLast">–</div></div>
+    <div class="tile"><div class="k" data-i18n="kSessions">Sessies</div><div class="v" id="tSessions">–</div></div>
   </div>
 
   <div class="card">
-    <h2>Tijdlijn van de dag</h2>
-    <div class="legend"><span><i style="background:var(--active-soft);border:1px solid var(--active)"></i>Actief bezig</span><span><i style="background:var(--accent)"></i>Prompt</span></div>
+    <h2 data-i18n="timeline">Tijdlijn van de dag</h2>
+    <div class="legend"><span><i style="background:var(--active-soft);border:1px solid var(--active)"></i><span data-i18n="legendActive">Actief bezig</span></span><span><i style="background:var(--accent)"></i><span data-i18n="legendPrompt">Prompt</span></span></div>
     <div class="timeline" id="timeline"></div>
     <div class="axis" id="axis"></div>
   </div>
 
   <div class="card">
-    <h2>Prompts per uur</h2>
+    <h2 data-i18n="perHour">Prompts per uur</h2>
     <div class="hours" id="hours"></div>
     <div class="hourlabels" id="hourlabels"></div>
   </div>
 
   <div class="card">
     <div class="row2">
-      <h2>Overzicht</h2>
-      <div class="seg3" id="ranges"><button data-r="7">Week</button><button data-r="30">Maand</button><button data-r="90">Kwartaal</button></div>
+      <h2 data-i18n="overview">Overzicht</h2>
+      <div class="seg3" id="ranges"><button data-r="7" data-i18n="week">Week</button><button data-r="30" data-i18n="month">Maand</button><button data-r="90" data-i18n="quarter">Kwartaal</button></div>
     </div>
     <div class="status" id="rangeTotal" style="margin-bottom:10px"></div>
     <div class="days" id="days"></div>
@@ -133,24 +138,25 @@
 
   <div class="card">
     <div class="row2">
-      <h2>Alle prompts van deze dag</h2>
-      <label class="chk"><input type="checkbox" id="full"> Volledige tekst tonen</label>
+      <h2 data-i18n="allPrompts">Alle prompts van deze dag</h2>
+      <label class="chk"><input type="checkbox" id="full"> <span data-i18n="fullText">Volledige tekst tonen</span></label>
     </div>
     <table>
-      <thead><tr><th>Tijd</th><th>#</th><th>Sessie</th><th>Prompt</th></tr></thead>
+      <thead><tr><th data-i18n="thTime">Tijd</th><th>#</th><th data-i18n="thSession">Sessie</th><th data-i18n="thPrompt">Prompt</th></tr></thead>
       <tbody id="list"></tbody>
     </table>
   </div>
   <footer class="support" data-donate-box hidden>
     <div>
-      <b>Vind je Claude Code Logger handig?</b><br>
-      De app is gratis en blijft lokaal op je eigen pc. Met een kleine donatie help je mee aan nieuwe versies met meer grafieken en patronen.
+      <b data-i18n="supportTitle">Vind je Claude Code Logger handig?</b><br>
+      <span data-i18n="supportText">De app is gratis en blijft lokaal op je eigen pc. Met een kleine donatie help je mee aan nieuwe versies met meer grafieken en patronen.</span>
     </div>
-    <a class="donate big" data-donate target="_blank" rel="noopener">♥ Doneer</a>
+    <a class="donate big" data-donate data-i18n="donateBig" target="_blank" rel="noopener">♥ Doneer</a>
   </footer>
 </div>
 <div class="tip" id="tip"></div>
 
+<script src="/i18n.js"></script>
 <script>
 const GAP_MS = 10 * 60 * 1000; // pauze langer dan 10 min = nieuwe actieve periode
 const DEMO = new URLSearchParams(location.search).has("demo"); // ?demo = verzonnen voorbeelddata
@@ -162,6 +168,49 @@ if (DONATE_URL) {
 }
 const $ = id => document.getElementById(id);
 let data = null;
+
+// taal: bewaarde keuze, anders de browsertaal, anders Engels
+function stored(k) { try { return localStorage.getItem(k); } catch { return null; } }
+function store(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} }
+let extraLang = LANGS[stored("extraLang")] && !BASE_LANGS.includes(stored("extraLang")) ? stored("extraLang") : null;
+let lang = new URLSearchParams(location.search).get("lang") || stored("lang") || (navigator.language || "en").slice(0, 2).toLowerCase();
+if (!LANGS[lang]) lang = "en";
+if (!BASE_LANGS.includes(lang)) extraLang = lang;
+let T = LANGS[lang];
+
+function projName(p) { return p === "Zonder map" ? T.noFolder : p === "Onbekend" ? T.unknown : p; }
+function renderStatus() {
+  if (!data) return;
+  $("status").textContent = DEMO ? T.demoStatus : T.status(data.prompts.length, data.files, hms(data.generated));
+}
+
+function renderLangs() {
+  const shown = extraLang ? [...BASE_LANGS, extraLang] : BASE_LANGS;
+  $("langs").innerHTML = shown.map(k => `<button data-lang="${k}" class="${k === lang ? "on" : ""}" title="${LANGS[k].name}">${LANGS[k].short}</button>`).join("");
+  const others = Object.keys(LANGS).filter(k => !BASE_LANGS.includes(k));
+  $("extra").innerHTML = `<option value="" disabled selected hidden>${T.extra}</option>` +
+    others.map(k => `<option value="${k}">${LANGS[k].name}</option>`).join("") +
+    (extraLang ? `<option value="-">${T.none}</option>` : "");
+  $("extra").title = T.extraTitle;
+}
+
+function applyLang() {
+  T = LANGS[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = T[el.dataset.i18n]; });
+  document.querySelectorAll("[data-i18n-title]").forEach(el => { el.title = T[el.dataset.i18nTitle]; });
+  renderLangs();
+  renderStatus();
+  render();
+}
+
+function setLang(k) {
+  lang = k;
+  store("lang", k);
+  applyLang();
+  if (DEMO) load(); // demodata is per taal
+}
+
 let day = startOfDay(new Date());
 let range = 30;
 try { range = Number(localStorage.getItem("range")) || 30; } catch {}
@@ -170,11 +219,11 @@ range = Number(new URLSearchParams(location.search).get("range")) || range;
 function startOfDay(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
 function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return startOfDay(x); }
 function isoDate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
-function hms(ts) { return new Date(ts).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit", second: "2-digit" }); }
+function hms(ts) { return new Date(ts).toLocaleTimeString(T.locale, { hour: "2-digit", minute: "2-digit", second: "2-digit" }); }
 function dur(ms) {
   const m = Math.round(ms / 60000);
-  if (m < 60) return `${m} min`;
-  return `${Math.floor(m / 60)}u ${String(m % 60).padStart(2, "0")}m`;
+  if (m < 60) return `${m} ${T.min}`;
+  return `${Math.floor(m / 60)}${T.h} ${String(m % 60).padStart(2, "0")}m`;
 }
 function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
@@ -203,9 +252,9 @@ function render() {
   if (!data) return;
   const s = dayStats(day);
   const isToday = day.getTime() === startOfDay(new Date()).getTime();
-  const dateTxt = day.toLocaleDateString("nl-NL", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const dateTxt = day.toLocaleDateString(T.locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const n = s.prompts.length;
-  $("headline").innerHTML = `${isToday ? "Vandaag, " : ""}${esc(dateTxt)}: je hebt <b>${n}</b> prompt${n === 1 ? "" : "s"} gegeven`;
+  $("headline").innerHTML = T.headline(esc(dateTxt), n, isToday);
   $("date").value = isoDate(day);
   $("tPrompts").textContent = n;
   $("tActive").textContent = s.act.length ? dur(s.active) : "–";
@@ -216,8 +265,8 @@ function render() {
   // tijdlijn
   const span = s.to - s.from, pct = t => ((t - s.from) / span * 100).toFixed(3) + "%";
   let tl = "";
-  for (const g of s.segs) tl += `<div class="seg" style="left:${pct(g.start)};width:${((g.end - g.start) / span * 100).toFixed(3)}%" data-tip="Actief ${hms(g.start)} – ${hms(g.end)} (${dur(g.end - g.start)})"></div>`;
-  s.prompts.forEach((p, i) => tl += `<div class="tick" style="left:${pct(p.ts)}" data-tip="#${i + 1} om ${hms(p.ts)} — ${esc(p.text.slice(0, 90))}"></div>`);
+  for (const g of s.segs) tl += `<div class="seg" style="left:${pct(g.start)};width:${((g.end - g.start) / span * 100).toFixed(3)}%" data-tip="${T.activeTip(hms(g.start), hms(g.end), dur(g.end - g.start))}"></div>`;
+  s.prompts.forEach((p, i) => tl += `<div class="tick" style="left:${pct(p.ts)}" data-tip="${T.promptTip(i + 1, hms(p.ts))} — ${esc(p.text.slice(0, 90))}"></div>`);
   $("timeline").innerHTML = tl;
   $("axis").innerHTML = [0, 3, 6, 9, 12, 15, 18, 21, 24].map(h => `<span style="left:${h / 24 * 100}%">${String(h).padStart(2, "0")}:00</span>`).join("")
     .replace('left:0%"', 'left:0%;transform:none"').replace('left:100%"', 'left:100%;transform:translateX(-100%)"');
@@ -226,7 +275,7 @@ function render() {
   const perHour = Array(24).fill(0);
   for (const p of s.prompts) perHour[new Date(p.ts).getHours()]++;
   const maxH = Math.max(1, ...perHour);
-  $("hours").innerHTML = perHour.map((c, h) => `<div data-n="${c}" style="height:${c / maxH * 100}%" data-tip="${String(h).padStart(2, "0")}:00–${String(h + 1).padStart(2, "0")}:00 · ${c} prompt${c === 1 ? "" : "s"}"></div>`).join("");
+  $("hours").innerHTML = perHour.map((c, h) => `<div data-n="${c}" style="height:${c / maxH * 100}%" data-tip="${String(h).padStart(2, "0")}:00–${String(h + 1).padStart(2, "0")}:00 · ${T.prompts(c)}"></div>`).join("");
   $("hourlabels").innerHTML = perHour.map((_, h) => `<span>${h}</span>`).join("");
 
   // overzicht van de laatste week / maand / kwartaal (eindigend op vandaag)
@@ -237,32 +286,30 @@ function render() {
     counts.push({ d, c: st.prompts.length, active: st.active });
   }
   const maxD = Math.max(1, ...counts.map(x => x.c));
-  $("days").innerHTML = counts.map(x => `<div class="${x.d.getTime() === day.getTime() ? "sel" : ""}" data-day="${x.d.getTime()}" style="height:${Math.max(2, x.c / maxD * 100)}%" data-tip="${x.d.toLocaleDateString("nl-NL", { weekday: "short", day: "numeric", month: "short" })} · ${x.c} prompts${x.active ? " · " + dur(x.active) + " actief" : ""}"></div>`).join("");
-  $("dayrange").innerHTML = `<span>${counts[0].d.toLocaleDateString("nl-NL", { day: "numeric", month: "short" })}</span><span>vandaag</span>`;
+  $("days").innerHTML = counts.map(x => `<div class="${x.d.getTime() === day.getTime() ? "sel" : ""}" data-day="${x.d.getTime()}" style="height:${Math.max(2, x.c / maxD * 100)}%" data-tip="${x.d.toLocaleDateString(T.locale, { weekday: "short", day: "numeric", month: "short" })} · ${T.prompts(x.c)}${x.active ? " · " + T.activeSuffix(dur(x.active)) : ""}"></div>`).join("");
+  $("dayrange").innerHTML = `<span>${counts[0].d.toLocaleDateString(T.locale, { day: "numeric", month: "short" })}</span><span>${T.todayShort}</span>`;
   const totP = counts.reduce((a, x) => a + x.c, 0), totA = counts.reduce((a, x) => a + x.active, 0);
   const activeDays = counts.filter(x => x.c).length;
-  $("rangeTotal").textContent = `${totP} prompts · ${dur(totA)} actief · ${activeDays} van ${range} dagen actief`;
+  $("rangeTotal").textContent = T.rangeTotal(totP, dur(totA), activeDays, range);
   document.querySelectorAll("#ranges button").forEach(b => b.classList.toggle("on", Number(b.dataset.r) === range));
 
   // lijst
   const full = $("full").checked;
   $("list").innerHTML = n ? s.prompts.map((p, i) => `<tr>
       <td class="t">${hms(p.ts)}</td><td class="n">${i + 1}</td>
-      <td class="s" title="${esc(p.title || "")} · ${esc(p.project)}">${esc(p.title || p.project)}</td>
+      <td class="s" title="${esc(p.title || "")} · ${esc(projName(p.project))}">${esc(p.title || projName(p.project))}</td>
       <td class="p ${full ? "" : "clip"}"><div>${esc(p.text)}</div></td></tr>`).join("")
-    : `<tr><td colspan="4" class="empty">Geen prompts op deze dag.</td></tr>`;
+    : `<tr><td colspan="4" class="empty">${T.empty}</td></tr>`;
 }
 
 async function load() {
   try {
-    const r = await fetch(DEMO ? "/api/data?demo" : "/api/data", { cache: "no-store" });
+    const r = await fetch(DEMO ? `/api/data?demo&lang=${lang}` : "/api/data", { cache: "no-store" });
     data = await r.json();
-    $("status").textContent = DEMO
-      ? `Demomodus · verzonnen voorbeelddata`
-      : `${data.prompts.length} prompts in ${data.files} transcripts · bijgewerkt ${hms(data.generated)}`;
+    renderStatus();
     render();
   } catch (e) {
-    $("status").textContent = "Kan de logger-server niet bereiken. Draait start.bat nog?";
+    data = null; $("status").textContent = T.offline;
   }
 }
 
@@ -271,6 +318,20 @@ $("next").onclick = () => { day = addDays(day, 1); render(); };
 $("today").onclick = () => { day = startOfDay(new Date()); render(); };
 $("date").onchange = e => { if (e.target.value) { const [y, m, d] = e.target.value.split("-").map(Number); day = new Date(y, m - 1, d); render(); } };
 $("full").onchange = render;
+$("langs").onclick = e => { const k = e.target.dataset.lang; if (k) setLang(k); };
+$("extra").onchange = e => {
+  const k = e.target.value;
+  if (k === "-") {
+    store("extraLang", null);
+    const wasExtra = lang === extraLang;
+    extraLang = null;
+    if (wasExtra) setLang("en"); else renderLangs();
+  } else {
+    extraLang = k;
+    store("extraLang", k);
+    setLang(k);
+  }
+};
 $("ranges").onclick = e => {
   const r = Number(e.target.dataset.r);
   if (!r) return;
@@ -290,6 +351,7 @@ document.addEventListener("mousemove", e => {
   tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px";
 });
 
+applyLang();
 load();
 setInterval(load, 15000);
 </script>
